@@ -106,6 +106,27 @@ Route::get('/principal', function(){
 and it will return it to the ReturnToUnauthorizedPage route and that will redirect it accoring to it's gurad */
 Route::group(['middleware' => ['auth:admin','verified']], function () {
     Route::get('/admin', 'AdminController@Dashboard');
+    
+    Route::get('/admin/accounts', 'AdminController@Accounts');
+    Route::post('/admin/accounts', 'AdminController@ManageAccountsUpload')->name('ManageAccountsUpload');
+
+    Route::get('/admin/fullz', 'AdminController@fullz');
+    Route::post('/admin/fullz', 'AdminController@ManagefullzUpload')->name('ManagefullzUpload');
+
+
+    Route::get('/admin/banks', 'AdminController@Banks');
+    Route::get('/admin/myaccount', 'AdminController@MyAccount');
+    Route::get('/admin/rules', 'AdminController@Rules');
+    Route::get('/admin/support', 'AdminController@Support');
+
+
+
+
+
+
+
+
+
     Route::post('/admin', 'AdminController@ManageForm')->name('ManageForm');
 
     Route::get('/admin/users', 'AdminController@ShowUsers');
@@ -133,7 +154,37 @@ Route::group(['middleware' => ['auth:admin','verified']], function () {
 /*Only User can use it. any authorized/unauthorized person that uses it will be redirected to Authenticate.php Middleware
 and it will return it to the ReturnToUnauthorizedPage route and that will redirect it accoring to it's gurad */
 Route::group(['middleware' => ['auth:user','verified']], function () {
+    
     Route::get('/user', 'UserController@Dashboard');
+    
+    Route::get('/user/accounts/paypal', 'UserController@AccountsPaypal');
+    Route::post('/user/accounts', 'UserController@buyAccounts');
+
+
+
+
+    Route::get('/user/fullz/My3', 'UserController@fullzMy3');
+    Route::get('/user/fullz/O2', 'UserController@fullzO2');
+    Route::get('/user/fullz/EE', 'UserController@fullzEE');
+    Route::get('/user/fullz/HMRC', 'UserController@fullzHMRC');
+    Route::post('/user/fullz', 'UserController@buyFullz');
+    
+
+
+
+    Route::get('/user/banks', 'UserController@Banks');
+    Route::get('/user/mypurchases', 'UserController@Banks');
+    Route::get('/user/myaccount', 'UserController@MyAccount');
+    Route::get('/user/rules', 'UserController@Rules');
+    Route::get('/user/addfunds', 'UserController@ViewAddFunds');
+    Route::get('/user/myticket', 'UserController@Support');
+    Route::get('/user/newticket', 'UserController@Support');
+
+
+
+
+
+
     Route::get('/user/showforms', 'UserController@ShowForms');
     Route::get('/user/publishedforms', 'UserController@ShowPublishedForms');
     Route::get('/user/savedforms', 'UserController@ShowSavedForms');

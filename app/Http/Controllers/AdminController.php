@@ -21,8 +21,90 @@ class AdminController extends Controller
 
     public function Dashboard()
     {
-        return view('user.dashboard');
+        return view('admin.dashboard');
     }
+
+    public function Accounts(Request $request)
+    {
+        $accounts = DB::table('accounts')->get();
+        return view('admin.accounts')->with(['accounts' => $accounts]);
+    }
+
+    public function fullz()
+    {
+        $accounts = DB::table('fullz')->get();
+        return view('admin.fullz')->with(['accounts' => $accounts]);
+    }
+
+    public function Banks()
+    {
+        return view('admin.Banks');
+    }
+
+    public function MyAccount()
+    {
+        return view('admin.MyAccount');
+    }
+
+    public function Rules()
+    {
+        return view('admin.Rules');
+    }
+    public function Support()
+    {
+        return view('admin.Support');
+    }
+
+
+    //======================================================================
+    //for uploading fullz csv
+    //======================================================================
+    public function ManagefullzUpload(Request $request)
+    {
+        if ($request->has('addfullz'))
+        {
+            $fileName = $_FILES["file"]["tmp_name"]; //storing file in variable
+            if ($_FILES["file"]["size"] > 0)
+            {
+                // checking file if it is empty or not
+                $file = fopen($fileName, "r");
+                while (($column = fgetcsv($file, 5000, ",")) !== FALSE)
+                {
+                    DB::insert("insert into fullz (username, password, full_name, Telephone, dob, email, address, mmn, card_bin, card_bank, card_brand, card_type, card_holder_name, card_no, card_exp, security_code, account, sort_code, submitted_by, location, user_agent, browser, os, recieved, price, record_type , created_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [$column[0], $column[1], $column[2], $column[3], $column[4], $column[5], $column[6], $column[7], $column[8], $column[9], $column[10], $column[11], $column[12], $column[13], $column[14], $column[15], $column[16], $column[17], $column[18], $column[19], $column[20], $column[21], $column[22], $column[23], $column[24] ,$request->input('record_type'), Carbon::now()]);
+                }
+                return back()->with("success","Fullz Added Successfully.");
+            }
+            return back()->withErrors(['error' => 'Something Went Wrong']);
+        }
+        return back()->withErrors(['error' => 'Invalid Submission']);
+    }
+
+
+    //======================================================================
+    //for uploading Accounts csv
+    //======================================================================
+    public function  ManageAccountsUpload(Request $request)
+    {
+        if ($request->has('addAccounts'))
+        {
+            $fileName = $_FILES["file"]["tmp_name"]; //storing file in variable
+            if ($_FILES["file"]["size"] > 0)
+            {
+                // checking file if it is empty or not
+                $file = fopen($fileName, "r");
+                while (($column = fgetcsv($file, 5000, ",")) !== FALSE)
+                {
+                    DB::insert("insert into accounts (username, password, ip_address, location, browser, screen, user_agent, time, record_type, price, created_at) values (?,?,?,?,?,?,?,?,?,?,?)", [$column[0], $column[1], $column[2], $column[3], $column[4], $column[5], $column[6], $column[7], $request->input('record_type'), $column[8], Carbon::now()]);
+                }
+                return back()->with("success","Accounts Added Successfully.");
+            }
+            return back()->withErrors(['error' => 'Something Went Wrong']);
+        }
+        return back()->withErrors(['error' => 'Invalid Submission']);
+    }
+
+
+
     //======================================================================
     //View Form
     //======================================================================

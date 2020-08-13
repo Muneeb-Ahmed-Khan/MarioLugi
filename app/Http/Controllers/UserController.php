@@ -24,6 +24,164 @@ class UserController extends Controller
         return view("user.dashboard");
     }
 
+
+    public function AccountsPaypal()
+    {
+        $accounts = DB::table('accounts')->where(['record_type'=> 'paypal'])->get();
+        return view('user.accounts')->with(['accounts' => $accounts]);
+    }
+
+    //=====================================================
+    //      FULLZ Functions
+    //=====================================================
+
+    public function fullzMy3()
+    {
+        $accounts = DB::table('fullz')->where(['record_type'=> 'My3'])->get();
+
+        return view('user.fullz')->with(['accounts' => $accounts]);
+    }
+
+    
+    public function fullzO2()
+    {
+        $accounts = DB::table('fullz')->where(['record_type'=> 'O2'])->get();
+
+        return view('user.fullz')->with(['accounts' => $accounts]);
+    }
+    
+    
+    public function fullzEE()
+    {
+        $accounts = DB::table('fullz')->where(['record_type'=> 'EE'])->get();
+
+        return view('user.fullz')->with(['accounts' => $accounts]);
+    }
+    
+    
+    public function fullzHMRC()
+    {
+        $accounts = DB::table('fullz')->where(['record_type'=> 'HMRC'])->get();
+
+        return view('user.fullz')->with(['accounts' => $accounts]);
+    }
+
+
+    public function buyFullz(Request $request)
+    {
+        #buy and update to table
+        return back()->with(['success' => $request->input('fullz_id')]);
+    }
+
+
+
+
+    //=====================================================
+    //      ACCOUNTS Functions
+    //=====================================================
+
+
+
+
+
+
+
+
+
+    public function fullz(Request $request)
+    {
+        if($request->has('type'))
+        {
+            $accounts = DB::table('fullz')->where(['page_no'=> 'fullz-'.$request->input('type')])->get();
+            return view('user.fullz')->with(['accounts' => $accounts]);
+        }
+
+        return redirect('/user')->withErrors(["WrongInput" => "Something went Wrong"]);
+    }
+
+    public function Banks()
+    {
+        return view('user.Banks');
+    }
+
+    public function MyAccount()
+    {
+        return view('user.MyAccount');
+    }
+
+    public function Rules()
+    {
+        return view('user.Rules');
+    }
+    public function Support()
+    {
+        return view('user.Support');
+    }
+
+
+    public function ViewAddFunds(Request $requrest)
+    {
+        return view('user.addfunds');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function ShowForms(Request $request)
     {
         //get the active test where(isActive, 1);

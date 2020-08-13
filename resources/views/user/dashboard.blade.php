@@ -1,142 +1,71 @@
 @extends('layouts.dashboardEssentials')
 @section('content')
 
-<style>
-.col-lg-custom {
-    min-width : 300px;
-    width: 100%;
-}
-.card {
-    box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03), 0 0.9375rem 1.40625rem rgba(4,9,20,0.03), 0 0.25rem 0.53125rem rgba(4,9,20,0.05), 0 0.125rem 0.1875rem rgba(4,9,20,0.03);
-    border-width: 0;
-    transition: all .2s;
-}
-
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(26,54,126,0.125);
-    border-radius: .25rem;
-}
-
-.card-body {
-    flex: 1 1 auto;
-    padding: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 
-
-.card-title {
-    text-transform: uppercase;
-    color: rgba(13,27,62,0.7);
-    font-weight: bold;
-    font-size: 20px;
-}
-.mb-0, .my-0 {
-    margin-bottom: 0 !important;
-}
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    background-color: rgba(0,0,0,0);
-}
-</style>
-
-<div id="main" class="main-padding main-dashboard extend">
-
-
-<div class="col-lg-custom">
-    <div class="main-card mb-3 card" style="height: -webkit-fill-available;">
-        <div class="card-body" >
-            
-        </div>
-    </div>
+<div style="max-width:1000px; margin:auto; margin-top:30px; ">
+   <div class="page-header" style="margin-bottom: 35px;">
+      <h4 class="page-title">Home</h4>
+   </div>
+   <div class="card">
+      <div class="card-body">
+         <div class="d-flex mt-4 align-items-top">
+            <div class="mb-0 flex-grow">
+               <h5 class="mr-2 mb-2">Welcome to Mario & Luigi’s Store.</h5>
+               <p class="mb-0 font-weight-light">Here at the Mario & Luigi’s Store, we deliver the finest Fullz, Logs & Web accounts on the market.</p>
+               <p class="mb-0 font-weight-light">We have everything you need. Whatever your preference we can cater to it.</p>
+               <p class="mb-0 font-weight-light">We ensure all our products are of top quality. Nobody else does it like us. Enjoy your time on the market, Happy Carding & Spoofing !</p>
+               <p class="mb-0 font-weight-light">Fresh spam is sent out every couple of days so there will be abundant amounts of work. Join our Telegram group for updates & free give aways: <b><a href="https://t.me/mariolugiscc">FREE GIVEAWAY !!!</a><b> </p>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 
 
-</div>
+
+<script type="text/javascript" src="{{asset('/js/toastr.js')}}"></script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+        }
+</script>
+
 
 @if(!empty($errors))
-<script type="text/javascript" src="{{asset('/js/toastr.js')}}"></script>
-@foreach ($errors->all() as $error)
-    <script>
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-center",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-    }
-    Command: toastr["error"]("{{$error}}");
-    </script>
-@endforeach
+
+    @foreach ($errors->all() as $error)
+        <script>
+            Command: toastr["error"]("{{$error}}");
+        </script>
+    @endforeach
 @endif
 
 
 @if(session()->has('success'))
-<script type="text/javascript" src="{{asset('/js/toastr.js')}}"></script>
-<script>
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-center",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-    }
-    Command: toastr["success"]("{{__(session('success'))}}");
-</script>
+    <script>
+        Command: toastr["success"]("{{__(session('success'))}}");
+    </script>
 @endif
 
 @if(session()->has('info'))
-<script type="text/javascript" src="{{asset('/js/toastr.js')}}"></script>
-<script>
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-center",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-    }
-    Command: toastr["info"]("{{__(session('info'))}}");
-</script>
+    <script>
+        Command: toastr["info"]("{{__(session('info'))}}");
+    </script>
 @endif
 
 @endsection
