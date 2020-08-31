@@ -19,6 +19,13 @@
     }
     </script>
 
+    <form class="form-inline" style="display: inline;"  method="post" >
+    @csrf
+            <input name="binSearch" maxlength="6" class="form-control" type="text" placeholder="Bin Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+
     <div class="card" style="margin-bottom: 35px; margin-top: 20px;">
         <div class="card-body">
             <div class="table-responsive">
@@ -50,19 +57,7 @@
                     </tbody>
                     
                 </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                {{ $accounts->links() }}
             </div>
         </div>
     </div>

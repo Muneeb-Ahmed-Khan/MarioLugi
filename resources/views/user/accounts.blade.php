@@ -5,6 +5,21 @@
 
 <div style="max-width:1000px; margin:auto; margin-top:30px; ">
 
+    <form method="post" action="/user/accounts" hidden>
+    @csrf
+        <input type="text" name="account_id" id="account_id"/>
+        <input type="submit" id="form_submit"/>
+    </form>
+
+    <script>
+    function buyAccounts(row_id)
+    {
+        document.getElementById('account_id').value = row_id;
+        document.getElementById('form_submit').click();
+    }
+    </script>
+
+
     <div class="card" style="margin-bottom: 35px; margin-top: 20px;">
         <div class="card-body">
             <div class="table-responsive">
@@ -27,26 +42,14 @@
                                 <td> {{ $acc->time }}  </td>
                                 <td> {{ $acc->price }}$  </td>
                                 <td>
-                                    <button style="float:right;" class="btn btn-primary">BUY</button>
+                                    <button onclick="buyAccounts({{ $acc->id }});" style="float:right;" class="btn btn-primary">BUY</button>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                     
                 </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                {{ $accounts->links() }}
             </div>
         </div>
     </div>

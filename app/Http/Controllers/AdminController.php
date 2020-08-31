@@ -38,21 +38,20 @@ class AdminController extends Controller
 
     public function Banks()
     {
-        return view('admin.Banks');
+        $accounts = DB::table('banks')->get();
+        return view('admin.Banks')->with(['accounts' => $accounts]);
     }
 
-    public function MyAccount()
-    {
-        return view('admin.MyAccount');
-    }
 
     public function Rules()
     {
         return view('admin.Rules');
     }
-    public function Support()
+    
+    public function Users()
     {
-        return view('admin.Support');
+        $users = DB::table('users')->paginate(20);
+        return view('admin.users')->with(['users' => $users]);
     }
 
 
@@ -102,6 +101,110 @@ class AdminController extends Controller
         }
         return back()->withErrors(['error' => 'Invalid Submission']);
     }
+
+
+    //======================================================================
+    //for uploading Banks csv
+    //======================================================================
+    public function  ManageBanksUpload(Request $request)
+    {
+        if ($request->has('addBanks'))
+        {
+            $fileName = $_FILES["file"]["tmp_name"]; //storing file in variable
+            if ($_FILES["file"]["size"] > 0)
+            {
+                // checking file if it is empty or not
+                $file = fopen($fileName, "r");
+                while (($column = fgetcsv($file, 5000, ",")) !== FALSE)
+                {
+                    DB::insert("insert into banks (full_name, dob, address, telephone, mobile_telephone, mother_maiden, username, password, memorable_info, security_code, sort_code, account_no, card_no, card_exp, cvv, submitted_by, location, user_agent, browser, os, recieved, price, created_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [$column[0], $column[1], $column[2], $column[3], $column[4], $column[5], $column[6], $column[7], $column[8], $column[9], $column[10], $column[11], $column[12], $column[13], $column[14], $column[15], $column[16], $column[17], $column[18], $column[19], $column[20], $column[21], Carbon::now()]);
+                }
+                return back()->with("success","Accounts Added Successfully.");
+            }
+            return back()->withErrors(['error' => 'Something Went Wrong']);
+        }
+        return back()->withErrors(['error' => 'Invalid Submission']);
+    }
+
+
+
+    //======================================================================
+    //  Block / Unblock Section
+    //======================================================================
+    public function BlockUser(Request $request)
+    {
+        $count = DB::table('users')->where('id', (int)$request->input('user_id'))->update([
+             'isActive' => 0,
+             'updated_at' => Carbon::now()
+         ]);
+
+        if($count != null)
+        {
+            return back()->with(["success" => "User Blocked Successfully"]);
+        }
+        return  back()->withErrors(['error' => 'Blocking Failed']);
+    }
+    
+    public function UnBlockUser(Request $request)
+    {
+        $count = DB::table('users')->where('id', (int)$request->input('user_id'))->update([
+            'isActive' => 1,
+            'updated_at' => Carbon::now()
+        ]);
+        
+        if($count != null)
+        {
+            return back()->with(["success" => "User UnBlocked Successfully"]);
+        }
+        return  back()->withErrors(['error' => 'UnBlocking Failed']);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

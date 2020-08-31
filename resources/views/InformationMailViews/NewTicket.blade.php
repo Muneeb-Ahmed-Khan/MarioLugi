@@ -5,7 +5,9 @@
 </head>
 <body>
     @foreach($user as $u)
-    <p>You can Change your password later inside your account afer login {{ $u->name }}  {{ $u->email }}  {{ $u->password }}.</p>
+    <h4>From : {{ $u->email }}</h4>
+    <h4>Subject : {{ $u->subject }}</h4>
+    <p>{{ $u->content }}</p>
     @endforeach
 </body>
 </html>

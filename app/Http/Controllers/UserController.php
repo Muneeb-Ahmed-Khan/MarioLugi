@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InformationMail;
+
 class UserController extends Controller
 {
      //======================================================================
@@ -23,21 +26,65 @@ class UserController extends Controller
     {
         return view("user.dashboard");
     }
+    
 
-
-    public function AccountsPaypal()
+    
+    
+    
+    
+    
+    
+    //=====================================================
+    //      My Purchases Functions
+    //=====================================================
+    
+    public function myPurchases()
     {
-        $accounts = DB::table('accounts')->where(['record_type'=> 'paypal'])->get();
-        return view('user.accounts')->with(['accounts' => $accounts]);
-    }
+        $accounts = 
+        
+        
+        DB::table('bought_accounts')
+            ->join('accounts', 'accounts.id', '=', 'bought_accounts.account_id')
+            ->where('user_id', Auth::user()->id)
+            ->get();
 
+        $fullz = DB::table('bought_fullz')
+        ->join('fullz', 'fullz.id', '=', 'bought_fullz.fullz_id')
+        ->where('user_id', Auth::user()->id)
+        ->get();
+
+        $banks = DB::table('bought_banks')
+        ->join('banks', 'banks.id', '=', 'bought_banks.banks_id')
+        ->where('user_id', Auth::user()->id)
+        ->get();
+        
+        return view('user.mypurchases')->with(['accounts' => $accounts, 'fullz' => $fullz, 'banks' => $banks]);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //=====================================================
     //      FULLZ Functions
     //=====================================================
 
     public function fullzMy3()
     {
-        $accounts = DB::table('fullz')->where(['record_type'=> 'My3'])->get();
+        $accounts = DB::table('fullz')->where(['record_type'=> 'My3'])->paginate(15);
 
         return view('user.fullz')->with(['accounts' => $accounts]);
     }
@@ -45,7 +92,7 @@ class UserController extends Controller
     
     public function fullzO2()
     {
-        $accounts = DB::table('fullz')->where(['record_type'=> 'O2'])->get();
+        $accounts = DB::table('fullz')->where(['record_type'=> 'O2'])->paginate(15);
 
         return view('user.fullz')->with(['accounts' => $accounts]);
     }
@@ -53,7 +100,7 @@ class UserController extends Controller
     
     public function fullzEE()
     {
-        $accounts = DB::table('fullz')->where(['record_type'=> 'EE'])->get();
+        $accounts = DB::table('fullz')->where(['record_type'=> 'EE'])->paginate(15);
 
         return view('user.fullz')->with(['accounts' => $accounts]);
     }
@@ -61,7 +108,7 @@ class UserController extends Controller
     
     public function fullzHMRC()
     {
-        $accounts = DB::table('fullz')->where(['record_type'=> 'HMRC'])->get();
+        $accounts = DB::table('fullz')->where(['record_type'=> 'HMRC'])->paginate(15);
 
         return view('user.fullz')->with(['accounts' => $accounts]);
     }
@@ -70,8 +117,130 @@ class UserController extends Controller
     public function buyFullz(Request $request)
     {
         #buy and update to table
-        return back()->with(['success' => $request->input('fullz_id')]);
+        if(is_numeric($request->input('fullz_id')))
+        {
+            $accounts = DB::table('fullz')->where([
+                'id' => $request->input('fullz_id')
+            ])->get();
+
+            $balance = DB::table('users')->select('balance')->where([
+                'id' =>  Auth::user()->id,
+                'email' => Auth::user()->email,
+            ])->get();
+
+            if($balance[0]->balance > $accounts[0]->price)
+            {
+                $count = DB::table('users')->where([
+                    'id' =>  Auth::user()->id,
+                    'email' => Auth::user()->email,
+                    ])->update([
+                    'balance' => $balance[0]->balance - $accounts[0]->price
+                ]);
+                
+                if($count != null)
+                {
+                    $check = DB::table('bought_fullz')->insert([
+
+                        'user_id' => Auth::user()->id,
+                        'fullz_id' => $request->input('fullz_id'),
+                        'created_at' => NOW()
+                    ]);
+            
+                    if($check == true)
+                    {
+                        return back()->with(["success" => "Purchased Successfully"]);
+                    }
+
+                    return back()->withErrors(["WrongInput" => "Something Went Wrong."]);
+                }
+            }
+        }
+
+
+        #buy and update to table
+        return back()->withErrors(["WrongInput" => "Account Balance Not Sufficent"]);
     }
+
+    public function FullzBinSearch(Request $request)
+    {
+        if(is_numeric($request->input('binSearch')))
+        {
+            $accounts = DB::table('fullz')
+                    ->where('record_type', $request->route('fullzType'))
+                    ->where('card_bin', $request->input('binSearch'))
+                    ->paginate(1500);
+            return view('user.fullz')->with(['accounts' => $accounts]);
+        }
+        return back()->withErrors(["WrongInput" => "Wrong Bin Type"]);
+    }
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //===============================================
+    //  Support Section
+    //===============================================
+    public function NewTicket()
+    {
+        return view('user.newTicket');
+    }
+
+    public function NewTicketSubmit(Request $request)
+    {
+        if($request->input('g-recaptcha-response') === null)
+        {
+            return back()->withErrors(["WrongInput" => "Please check the the captcha form."]);
+        }
+        else
+        {
+            $secretKey = "6Ldp_8QZAAAAAJ_4yhcSrqipDaXppOHs3Ft_9J1v";
+            // post request to server
+            $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($request->input('g-recaptcha-response'));
+            $response = file_get_contents($url);
+            $responseKeys = json_decode($response,true);
+            // should return JSON with success as true
+            if($responseKeys["success"]) {
+        
+                Mail::to("admin@marioLugi.com")->send(new InformationMail(json_encode((array(['subject'=>$request->input('subject'),'email'=>Auth::user()->email,'content'=>$request->input('content')])),true)));
+
+                return back()->with(["success" => "Ticket Posted Successfully"]);
+            } else {
+                return back()->withErrors(["WrongInput" => "Sorry, Spammer"]);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -80,34 +249,222 @@ class UserController extends Controller
     //      ACCOUNTS Functions
     //=====================================================
 
-
-
-
-
-
-
-
-
-    public function fullz(Request $request)
+    public function AccountsPaypal()
     {
-        if($request->has('type'))
+        $accounts = DB::table('accounts')->where(['record_type'=> 'paypal'])->paginate(15);
+        return view('user.accounts')->with(['accounts' => $accounts]);
+    }
+
+    public function buyAccounts(Request $request)
+    {
+        if(is_numeric($request->input('account_id')))
         {
-            $accounts = DB::table('fullz')->where(['page_no'=> 'fullz-'.$request->input('type')])->get();
-            return view('user.fullz')->with(['accounts' => $accounts]);
+            $accounts = DB::table('accounts')->where([
+                'id' => $request->input('account_id'),
+                'record_type'=> 'paypal'
+            ])->get();
+
+            $balance = DB::table('users')->select('balance')->where([
+                'id' =>  Auth::user()->id,
+                'email' => Auth::user()->email,
+            ])->get();
+
+            if($balance[0]->balance > $accounts[0]->price)
+            {
+                $count = DB::table('users')->where([
+                    'id' =>  Auth::user()->id,
+                    'email' => Auth::user()->email,
+                    ])->update([
+                    'balance' => $balance[0]->balance - $accounts[0]->price
+                ]);
+                
+                if($count != null)
+                {
+                    $check = DB::table('bought_accounts')->insert([
+
+                        'user_id' => Auth::user()->id,
+                        'account_id' => $request->input('account_id'),
+                        'created_at' => NOW()
+                    ]);
+            
+                    if($check == true)
+                    {
+                        return back()->with(["success" => "Purchased Successfully"]);
+                    }
+
+                    return back()->withErrors(["WrongInput" => "Something Went Wrong."]);
+                }
+            }
         }
 
-        return redirect('/user')->withErrors(["WrongInput" => "Something went Wrong"]);
+
+        #buy and update to table
+        return back()->withErrors(["WrongInput" => "Account Balance Not Sufficent"]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //=====================================================
+    //      BANKS Functions
+    //=====================================================
 
     public function Banks()
     {
-        return view('user.Banks');
+        $accounts = DB::table('banks')->paginate(15);
+        
+        return view('user.Banks')->with(['accounts' => $accounts]);
     }
+
+    public function BanksBinSearch(Request $request)
+    {
+        if(is_numeric($request->input('binSearch')))
+        {
+            $accounts = DB::table('banks')
+            ->where('card_no', 'like', $request->input('binSearch').'%')
+            ->paginate(1000);
+
+            return view('user.Banks')->with(['accounts' => $accounts]);
+        }
+        return back()->withErrors(["WrongInput" => "Wrong Bin Type"]);
+    }
+
+    public function buyBanks(Request $request)
+    {
+        #buy and update to table
+        if(is_numeric($request->input('banks_id')))
+        {
+            $accounts = DB::table('banks')->where([
+                'id' => $request->input('banks_id')
+            ])->get();
+
+            $balance = DB::table('users')->select('balance')->where([
+                'id' =>  Auth::user()->id,
+                'email' => Auth::user()->email,
+            ])->get();
+
+            if($balance[0]->balance > $accounts[0]->price)
+            {
+                $count = DB::table('users')->where([
+                    'id' =>  Auth::user()->id,
+                    'email' => Auth::user()->email,
+                    ])->update([
+                    'balance' => $balance[0]->balance - $accounts[0]->price
+                ]);
+                
+                if($count != null)
+                {
+                    $check = DB::table('bought_banks')->insert([
+
+                        'user_id' => Auth::user()->id,
+                        'banks_id' => $request->input('banks_id'),
+                        'created_at' => NOW()
+                    ]);
+            
+                    if($check == true)
+                    {
+                        return back()->with(["success" => "Purchased Successfully"]);
+                    }
+
+                    return back()->withErrors(["WrongInput" => "Something Went Wrong."]);
+                }
+            }
+        }
+
+
+        #buy and update to table
+        return back()->withErrors(["WrongInput" => "Account Balance Not Sufficent"]);
+    }
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //===============================
+    //  My Account Management
+    //===============================
 
     public function MyAccount()
     {
         return view('user.MyAccount');
     }
+
+    public function ManageMyAccount(Request $request)
+    {
+        if($request->has('profileForm'))
+        {
+            $count = DB::table('users')->where([
+
+                'id' =>  Auth::user()->id,
+                'email' => Auth::user()->email,
+                
+                ])->update([
+    
+                'telegram' => $request->input('telegram'),
+                'updated_at' => Carbon::now()
+    
+            ]);
+            
+            if($count != null)
+            {
+                return back()->with(["success" => "Data Updated Successfully"]);
+            }
+        }
+        else if($request->has('passwordForm'))
+        {
+            if(Hash::check($request->input('curPass'), Auth::user()->password))
+            {
+                $count = DB::table('users')->where([
+
+                    'id' =>  Auth::user()->id,
+                    'email' => Auth::user()->email,
+                    
+                    ])->update([
+        
+                    'password' => Hash::make($request->input('newPass')),
+                    'updated_at' => Carbon::now()
+        
+                ]);
+                
+                if($count != null)
+                {
+                    Auth::logout();
+                    return redirect('/')->with(["success" => "Password Updated Successfully"]);
+                }
+            }
+
+            return back()->withErrors(["WrongInput" => "Current password wrong."]);
+            
+        }
+        return back()->withErrors(["WrongInput" => "Something went Wrong"]);
+    }
+
 
     public function Rules()
     {

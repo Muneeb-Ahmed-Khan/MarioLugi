@@ -43,7 +43,7 @@ class CreateFullzTable extends Migration
             $table->string('recieved',100);
 
             $table->string('record_type',10);
-            $table->integer('price');
+            $table->integer('price')->default(0);
 
             $table->timestamps();
             

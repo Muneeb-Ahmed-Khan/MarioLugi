@@ -15,17 +15,17 @@
                   <div class="col-md-4 grid-margin">
                      <div class="card">
                         <div class="card-body">
-                           <h4>Edit ICQ&amp;E-mail</h4>
+                           <h4>Edit Telegram & E-mail</h4>
                            <hr>
                            <form class="form-horizontal" method="POST" action="">
                            @csrf
                               <div class="form-group">
-                                 <label>ICQ</label>
-                                 <input class="form-control" maxlength="9" required name="icq" value="0" type="text">
+                                 <label>Telegram</label>
+                                 <input class="form-control" required name="telegram" type="text">
                               </div>
                               <div class="form-group">
                                  <label>Email</label>
-                                 <input class="form-control" required name="email" value="{{ Auth::user()->email }}" type="email">
+                                 <input class="form-control" required  disabled name="email" value="{{ Auth::user()->email }}" type="email">
                               </div>
                               <div class="form-group">
                                  <input type="submit" value="Save Changes" name="profileForm" class="btn btn-danger center-block">
@@ -68,7 +68,9 @@
                               <br>
                               <b>Email:</b> {{ Auth::user()->email }}
                               <br>
-                              <b>ICQ:</b> 0<br><b>Balance:</b> $0
+                              <b>Telegram:</b> {{ Auth::user()->telegram }}
+                              <br>
+                              <b>Balance:</b> $0
                               <br>
                               <b>Money spent:</b> $0
                               <br>

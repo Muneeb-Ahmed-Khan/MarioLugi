@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name',100);
             $table->string('email')->unique();
+            $table->string('telegram',100)->nullable();
+            $table->integer('balance')->default(0)->unsigned();
             $table->timestamp('email_verified_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('password',255)->default('12345678');
             $table->boolean('isActive')->default(1);

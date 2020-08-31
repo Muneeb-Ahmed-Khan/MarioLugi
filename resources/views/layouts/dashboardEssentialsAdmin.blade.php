@@ -102,11 +102,13 @@
     <div class="header">
         <div class="headerContent">
             <a href="#default" class="logo">MarioLugi</a>
+            
             <!-- Search form -->
             <form class="form-inline" style="display: inline; margin-left: 15px;">
             <input class="form-control" type="text" placeholder="Bin Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+
             <div class="header-right">
                 <!-- <a class="active" href="#home">Home</a>
                 <a href="#contact">Contact</a> -->
@@ -148,15 +150,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/admin/myaccount">My Account</a>
+                <a class="nav-link" href="/admin/rules">Rules</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/admin/rules">Rules</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/support">Support</a>
+                <a class="nav-link" href="/admin/users">Users</a>
             </li>
 
         </ul>

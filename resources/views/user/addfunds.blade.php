@@ -70,18 +70,20 @@
 <script>
 function call() {
 	document.getElementById("loading").style.display = "block"; 
-	setTimeout(function(){ 
+	
+    setTimeout(function(){ 
 
-       var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     document.getElementById("message").innerHTML = this.responseText;
-	 document.getElementById("loading").style.display = "none"; 
-    }
-  };
+        var xhttp = new XMLHttpRequest();
+        
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("message").innerHTML = this.responseText;
+            document.getElementById("loading").style.display = "none"; 
+            }
+        };
 
-  xhttp.open("GET", "core.php?action=checkPayment&user=15077&address=13eRcbA58q4BXUZgt3pCg9zGKzhc3YU3pi", true);
-  xhttp.send();
+        xhttp.open("GET", "core.php?action=checkPayment&user=15077&address=13eRcbA58q4BXUZgt3pCg9zGKzhc3YU3pi", true);
+        xhttp.send();
    
     }, Math.floor((Math.random() * 10) + 1) * 1000);  
 }

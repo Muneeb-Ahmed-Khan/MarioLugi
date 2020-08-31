@@ -103,21 +103,38 @@
     <div class="header">
         <div class="headerContent">
             <a href="/" class="logo">MarioLugi</a>
-            <!-- Search form -->
-            <form class="form-inline" style="display: inline; margin-left: 15px;">
-            <input class="form-control" type="text" placeholder="Bin Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            
             <div class="header-right">
                 <!-- <a class="active" href="#home">Home</a>
                 <a href="#contact">Contact</a> -->
-
+                
                 <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
                         @csrf
                 </form>
+                
+                <a role="button" style="
+                    margin-right:20px; 
+                    background-color: #dc3545!important; 
+                    border-radius: 10px 10px 0px 0px; 
+                    color:white">
+                            <b>
+                            <?php
+                                if(Auth::guard("user")->check())
+                                {
+                                    $balance = DB::table('users')->select('balance')->where([
+                                        'id' =>  Auth::user()->id,
+                                        'email' => Auth::user()->email,
+                                    ])->get();
+
+                                    echo '$'.$balance[0]->balance;
+                                }
+                            ?>
+                            </b>
+                </a>
 
                 <a href="{{ url('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
-
+                
+                
             </div>
 
         </div>
@@ -166,7 +183,7 @@
 
 
         <li class="nav-item">
-            <a class="nav-link" href="user/banks">Bank Logs</a>
+            <a class="nav-link" href="/user/banks">Bank Logs</a>
         </li>
 
 
@@ -192,7 +209,6 @@
             Support
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/user/myticket">My Tickets</a>
             <a class="dropdown-item" href="/user/newticket">New Ticket</a>
             </div> 
         </li>

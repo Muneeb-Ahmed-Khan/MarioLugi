@@ -26,7 +26,7 @@ class CreateAccountsTable extends Migration
             $table->string('time',100);
 
             $table->string('record_type',10);
-            $table->integer('price');
+            $table->integer('price')->default(0);
             
             $table->timestamps();
         });

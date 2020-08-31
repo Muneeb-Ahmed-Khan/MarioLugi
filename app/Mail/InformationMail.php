@@ -31,6 +31,6 @@ class InformationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('InformationMailViews.adminPasswordInfoMail');
+        return $this->view('InformationMailViews.NewTicket');
     }
 }
