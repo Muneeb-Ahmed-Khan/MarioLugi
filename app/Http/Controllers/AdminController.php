@@ -75,6 +75,12 @@ class AdminController extends Controller
             }
             return back()->withErrors(['error' => 'Something Went Wrong']);
         }
+        else if($request->has('delete'))
+        {
+            DB::table('fullz')->delete();
+            DB::table('bought_fullz')->delete();
+            return back()->with("success","Records Successfully Deleted.");
+        }
         return back()->withErrors(['error' => 'Invalid Submission']);
     }
 
@@ -99,6 +105,12 @@ class AdminController extends Controller
             }
             return back()->withErrors(['error' => 'Something Went Wrong']);
         }
+        else if($request->has('delete'))
+        {
+            DB::table('accounts')->delete();
+            DB::table('bought_accounts')->delete();
+            return back()->with("success","Records Successfully Deleted.");
+        }
         return back()->withErrors(['error' => 'Invalid Submission']);
     }
 
@@ -122,6 +134,12 @@ class AdminController extends Controller
                 return back()->with("success","Accounts Added Successfully.");
             }
             return back()->withErrors(['error' => 'Something Went Wrong']);
+        }
+        else if($request->has('delete'))
+        {
+            DB::table('banks')->delete();
+            DB::table('bought_banks')->delete();
+            return back()->with("success","Records Successfully Deleted.");
         }
         return back()->withErrors(['error' => 'Invalid Submission']);
     }

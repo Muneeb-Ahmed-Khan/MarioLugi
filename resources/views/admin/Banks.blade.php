@@ -2,10 +2,22 @@
 @section('content')
 
 
+<form method="post" hidden action="{{ route('ManageBanksUpload') }}" >
+    @csrf
+    <input type="submit" name="delete" id="DeleteForm">
+</form>
+<script>
+function DeleteRecords()
+{
+    document.getElementById('DeleteForm').click();
+}
+</script>
+
 
 <div style="max-width:1000px; margin:auto; margin-top:30px; ">
 
 <button type="button" style='margin-top: 5px;' data-target="#addBanks" data-toggle="modal" class="btn btn-danger">Add Banks</button>
+<button type="button" class="btn btn-danger" style='margin-top: 5px;' onclick="DeleteRecords()">Delete</button>
 
     <div class="card" style="margin-bottom: 35px; margin-top: 20px;">
         <div class="card-body">
