@@ -20,12 +20,12 @@ Route::get('/copyright', 'PagesController@copyright');
 Route::get('/dmca', 'PagesController@dmca');
 Route::get('/faq', 'PagesController@faq');
 Route::get('/register', 'PagesController@register');
-Route::get('/terms', 'CryptoController@PaymentCallback');
+Route::get('/terms', 'PagesController@terms');
 
 //========================
 // BITCOIN GATEWAYCALLBACK
 //========================
-Route::post('/payment/cryptobox-callback', 'UserController@NewTicketSubmit');
+Route::post('/payment/cryptobox-callback', 'CryptoController@PaymentCallback');
 
 
 
