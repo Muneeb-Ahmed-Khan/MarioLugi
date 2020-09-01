@@ -20,7 +20,12 @@ Route::get('/copyright', 'PagesController@copyright');
 Route::get('/dmca', 'PagesController@dmca');
 Route::get('/faq', 'PagesController@faq');
 Route::get('/register', 'PagesController@register');
-Route::get('/terms', 'PagesController@terms');
+Route::get('/terms', 'CryptoController@PaymentCallback');
+
+//========================
+// BITCOIN GATEWAYCALLBACK
+//========================
+Route::post('/payment/cryptobox-callback', 'UserController@NewTicketSubmit');
 
 
 
@@ -164,6 +169,8 @@ Route::group(['middleware' => ['auth:user','verified']], function () {
     
     Route::get('/user/newticket', 'UserController@NewTicket');
     Route::post('/user/newticket', 'UserController@NewTicketSubmit');
+
+    
     
 });
 
