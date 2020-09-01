@@ -20,7 +20,7 @@ class CreateFullzTable extends Migration
             $table->string('username',100);
             $table->string('password',100);
             $table->string('full_name',100);
-            $table->string('Telephone',100);
+            $table->string('telephone',100);
             $table->string('dob',100);
             $table->string('email',100);
             $table->string('address',100);
