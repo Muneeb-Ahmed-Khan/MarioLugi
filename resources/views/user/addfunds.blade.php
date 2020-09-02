@@ -28,7 +28,7 @@
 	
 	// Open Source Bitcoin Payment Library
 	// ---------------------------------------------------------------
-	require_once CRYPTOBOX_PHP_FILES_PATH . "cryptobox-class.php";
+	include_once CRYPTOBOX_PHP_FILES_PATH . "cryptobox-class.php";
 	
 ?>
 
