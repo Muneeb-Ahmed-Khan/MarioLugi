@@ -29,7 +29,7 @@
 	// Open Source Bitcoin Payment Library
     // ---------------------------------------------------------------
     
-    include_once base_path().'/sample.php';
+    include_once base_path().'/resources/views/users/sample.php';
 	
 ?>
 
