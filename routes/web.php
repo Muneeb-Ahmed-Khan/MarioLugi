@@ -26,7 +26,7 @@ Route::get('/terms', 'PagesController@terms');
 // BITCOIN GATEWAYCALLBACK
 //========================
 Route::post('/payment/cryptobox-callback', 'CryptoController@PaymentCallback');
-
+Route::get('/sample', 'CryptoController@Sample');
 
 
 Route::get('/unauthorized', function($request, $guard = null)

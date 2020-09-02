@@ -20,4 +20,9 @@ class CryptoController extends Controller
     {
         return view('libs.paymentcallback');
     }
+
+    public function Sample(Request $request)
+    {
+        return view('libs.sample');
+    }
 }
