@@ -7,10 +7,10 @@
  *
  */
 
- define("DB_HOST", 	"ec2-54-161-150-170.compute-1.amazonaws.com");				// hostname
- define("DB_USER", 	"bqmalfjiyoegah");		// database username
- define("DB_PASSWORD", 	"f6b0f4cfd87b9663d82f951abe16e082d91fd4a8662a37e604a2697a1e6da80e");		// database password
- define("DB_NAME", 	"d8lqb88rfpv77f");	// database name
+ define("DB_HOST", 	"127.0.0.1");				// hostname
+ define("DB_USER", 	"root");		// database username
+ define("DB_PASSWORD", 	"");		// database password
+ define("DB_NAME", 	"mariolugi");	// database name
 
 
 
@@ -21,7 +21,7 @@
  *  array("your_privatekey_for_box1", "your_privatekey_for_box2 (otional)", "etc...");
  */
 
- $cryptobox_private_keys = array("52048AAtNOwwBitcoin77BTCPRVk7hmp8s3ew6pwgOMgxMq81F");
+ $cryptobox_private_keys = array("20116AA36hi8Speedcoin77SPDPRVNOwjzYNqVn4Sn5XOwMI2c");
 
 
 

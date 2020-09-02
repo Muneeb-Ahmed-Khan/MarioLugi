@@ -27,7 +27,7 @@
                                 <textarea rows="4"  class="form-control"  name="content" form="ticketForm"></textarea>
                               </div>
 
-                              <div class="g-recaptcha" data-sitekey="6Ldp_8QZAAAAAL-1_CW8Qu5y98tUg2MIZbzhUImN"></div>
+                              <!-- <div class="g-recaptcha" data-sitekey="6Ldp_8QZAAAAAL-1_CW8Qu5y98tUg2MIZbzhUImN"></div> -->
                                 <br>
                               <div class="form-group">
                                  <input type="submit" value="Submit Ticket" name="passwordForm" class="btn btn-danger center-block">

@@ -204,6 +204,10 @@ class UserController extends Controller
 
     public function NewTicketSubmit(Request $request)
     {
+        Mail::to("admin@marioLugi.com")->send(new InformationMail(json_encode((array(['subject'=>$request->input('subject'),'email'=>Auth::user()->email,'content'=>$request->input('content')])),true)));
+        return back()->with(["success" => "Ticket Posted Successfully"]);
+
+        // Original 
         if($request->input('g-recaptcha-response') === null)
         {
             return back()->withErrors(["WrongInput" => "Please check the the captcha form."]);
