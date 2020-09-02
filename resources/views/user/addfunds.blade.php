@@ -29,15 +29,7 @@
 	// Open Source Bitcoin Payment Library
     // ---------------------------------------------------------------
     
-    $filename = "sample.php";
-    if(file_exists($filename))
-    {
-        echo "True";
-    }
-    else
-    {
-        echo "False";
-    }
+    include_once base_path().'/sample.php';
 	
 ?>
 
