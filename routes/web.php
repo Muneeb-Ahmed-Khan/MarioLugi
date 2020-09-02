@@ -26,6 +26,7 @@ Route::get('/terms', 'PagesController@terms');
 // BITCOIN GATEWAYCALLBACK
 //========================
 Route::post('/payment/cryptobox-callback', 'CryptoController@PaymentCallback');
+Route::get('/payment/cryptobox-callback', 'CryptoController@PaymentCallbackGet');
 
 
 
