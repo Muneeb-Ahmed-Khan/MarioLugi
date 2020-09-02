@@ -130,7 +130,7 @@ function cryptobox_new_payment($paymentID = 0, $payment_details = array(), $box_
 	// Debug - new payment email notification for webmaster
 	// Uncomment lines below and make any test payment
 	// --------------------------------------------
-	//$email = "gaming.muneeb852@gmail.com";
+	//$email = "......";
 	//mail($email, "Payment - " . $paymentID . " - " . $box_status, " \n Payment ID: " . $paymentID . " \n\n Status: " . $box_status . " \n\n Details: " . print_r($payment_details, true));
 
 

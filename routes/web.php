@@ -166,6 +166,7 @@ Route::group(['middleware' => ['auth:user','verified']], function () {
 
     Route::get('/user/rules', 'UserController@Rules');
     Route::get('/user/addfunds', 'UserController@ViewAddFunds');
+    Route::post('/user/addfunds', 'UserController@ViewAddFunds')->name('addFunds');
     
     Route::get('/user/newticket', 'UserController@NewTicket');
     Route::post('/user/newticket', 'UserController@NewTicketSubmit');

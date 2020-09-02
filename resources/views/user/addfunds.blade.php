@@ -47,18 +47,36 @@
                     <br>
                     <br>
                     
-                    <div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-3">
-                            <img src="https://chart.googleapis.com/chart?cht=qr&amp;chl=bitcoin:13eRcbA58q4BXUZgt3pCg9zGKzhc3YU3pi&amp;message=ArthurShelby&amp;choe=UTF-8&amp;chs=200x200"><br>
+                    @if(!isset($amount))
+                    <form class="form-horizontal" method="POST" action="{{ route('addFunds') }}">
+                           @csrf
+                              <div class="form-group">
+                                    <label>Amount (USD)</label>
+                                    <input class="form-control" required name="amount" type="number" min="1" max="2000">
+                              </div>
+                              
+                              <div class="form-group">
+                                    <input type="submit" value="Pay with Bitcoin" name="fundsButton" class="btn btn-danger center-block">
+                              </div>
+                    </form>
+                    @else
+
+                        <div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <img src="https://chart.googleapis.com/chart?cht=qr&amp;chl=bitcoin:13eRcbA58q4BXUZgt3pCg9zGKzhc3YU3pi&amp;message=ArthurShelby&amp;choe=UTF-8&amp;chs=200x200"><br>
+                            </div>
+                            <div class="col-md-5"> <br>
+                                Address: <code style="color: red;">13eRcbA58q4BXUZgt3pCg9zGKzhc3YU3pi</code><br> <br>
+                                Status: <b><span id="message"></span></b><img src="{{asset('images/spin2.gif')}}" id="loading" style="width: 45px; display: none;"><br> <br>
+                                <button type="button" class="btn btn-info btn-sm" onclick="call()">Check payment</button>
+                            </div>
+                            <div class="col-md-2"></div>
                         </div>
-                        <div class="col-md-5"> <br>
-                            Address: <code style="color: red;">13eRcbA58q4BXUZgt3pCg9zGKzhc3YU3pi</code><br> <br>
-                            Status: <b><span id="message"></span></b><img src="{{asset('images/spin2.gif')}}" id="loading" style="width: 45px; display: none;"><br> <br>
-                            <button type="button" class="btn btn-info btn-sm" onclick="call()">Check payment</button>
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
+
+                    @endif
+
+                    
 
 
                 </div>

@@ -482,6 +482,16 @@ class UserController extends Controller
 
     public function ViewAddFunds(Request $requrest)
     {
+        if($requrest->has('fundsButton'))
+        {
+            if(is_numeric($request->input('amount')))
+            {
+               $amount =  $request->input('amount') + 0;
+               return view('user.addfunds')->with(["amount" => $amount, "userId" => Auth::user()->id]);
+            }
+            
+            return back()->withErrors(["WrongInput" => "Incorrect Amount Entered"]);
+        }
         return view('user.addfunds');
     }
 
