@@ -62,23 +62,7 @@
     // Create record for each your coin - https://gourl.io/editrecord/coin_boxes/0 ; and get free gourl keys
     // It is not bitcoin wallet private keys! Place GoUrl Public/Private keys below for all coins which you accept
 
-    $all_keys = array(	"bitcoin"  => 		array("public_key" => "-your public key for Bitcoin box-",  "private_key" => "-your private key for Bitcoin box-"),
-    "bitcoincash"  =>	array("public_key" => "-your public key for BitcoinCash box-",  "private_key" => "-your private key for BitcoinCash box-"),
-    "litecoin" => 		array("public_key" => "-your public key for Litecoin box-", "private_key" => "-your private key for Litecoin box-")); // etc.
-
-    // Demo Keys; for tests	(example - 5 coins)
-    $all_keys = array("bitcoin" => array(	"public_key" => "25654AAo79c3Bitcoin77BTCPUBqwIefT1j9fqqMwUtMI0huVL",  
-            "private_key" => "25654AAo79c3Bitcoin77BTCPRV0JG7w3jg0Tc5Pfi34U8o5JE"),
-    "bitcoincash" => array("public_key" => "25656AAeOGaPBitcoincash77BCHPUBOGF20MLcgvHMoXHmMRx", 
-            "private_key" => "25656AAeOGaPBitcoincash77BCHPRV8quZcxPwfEc93ArGB6D"),
-    "litecoin" => array(	"public_key" => "25657AAOwwzoLitecoin77LTCPUB4PVkUmYCa2dR770wNNstdk", 
-            "private_key" => "25657AAOwwzoLitecoin77LTCPRV7hmp8s3ew6pwgOMgxMq81F"),
-    "dogecoin" => array(	"public_key" => "25678AACxnGODogecoin77DOGEPUBZEaJlR9W48LUYagmT9LU8", 
-            "private_key" => "25678AACxnGODogecoin77DOGEPRVFvl6IDdisuWHVJLo5m4eq"),
-    "dash" => array(		"public_key" => "25658AAo79c3Dash77DASHPUBqwIefT1j9fqqMwUtMI0huVL0J", 
-            "private_key" => "25658AAo79c3Dash77DASHPRVG7w3jg0Tc5Pfi34U8o5JEiTss"),
-    "speedcoin" => array(	"public_key" => "20116AA36hi8Speedcoin77SPDPUBjTMX31yIra1IBRssY7yFy", 
-            "private_key" => "20116AA36hi8Speedcoin77SPDPRVNOwjzYNqVn4Sn5XOwMI2c")); // Demo keys!
+    $all_keys = array("bitcoin"  =>array("public_key" => "52048AAtNOwwBitcoin77BTCPUBzo4PVkUmYCa2dR770wNNstd",  "private_key" => "52048AAtNOwwBitcoin77BTCPRVk7hmp8s3ew6pwgOMgxMq81F")); // etc.
 
     //  IMPORTANT: Add in file /lib/cryptobox.config.php your database settings and your gourl.io coin private keys (need for Instant Payment Notifications) -
     /* if you use demo keys above, please add to /lib/cryptobox.config.php - 
