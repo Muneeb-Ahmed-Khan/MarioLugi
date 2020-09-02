@@ -9,7 +9,7 @@
 
  define("DB_HOST", 	"127.0.0.1");				// hostname
  define("DB_USER", 	"root");		// database username
- define("DB_PASSWORD", 	"");		// database password
+ define("DB_PASSWORD", 	"hYHR3hE/PZzC+pVwH0vUTXdDbQHMN5IT6jADUI+wyqE=");		// database password
  define("DB_NAME", 	"mariolugi");	// database name
 
 
