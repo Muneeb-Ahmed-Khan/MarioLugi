@@ -90,11 +90,17 @@
                         <table id="order-listing" class="table">
                             <thead>
                             <tr>
-                                <th>Address</th>
+                                <th>Date</th>
                                 <th>Amount</th>
                             </tr>
                             </thead>
                             <tbody>
+                                @foreach($history as $h)
+                                    <tr>
+                                        <td> {{ $h->txDate }}  </td>
+                                        <td> {{ $h->amountUSD }}  </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
