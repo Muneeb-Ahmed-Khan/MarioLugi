@@ -1,14 +1,23 @@
 @extends('layouts.dashboardEssentials')
 @section('content')
 
+
+
+
+
+
 <?php
 
-    // Change path to your files
-    DEFINE("CRYPTOBOX_PHP_FILES_PATH", "libs/");        	// path to directory with files: cryptobox.class.php / cryptobox.callback.php / cryptobox.newpayment.php;         
-                                                        // cryptobox.newpayment.php will be automatically call through ajax/php two times - payment received/confirmed
-	DEFINE("CRYPTOBOX_IMG_FILES_PATH", asset('bitcoin')."/images/");      // path to directory with coin image files (directory 'images' by default)
-	DEFINE("CRYPTOBOX_JS_FILES_PATH", asset('bitcoin')."/js/");			// path to directory with files: ajax.min.js/support.min.js
+	// bitcoin/altcoin payment box; open source
 	
+	// Change path to your files
+	// --------------------------------------
+	DEFINE("CRYPTOBOX_PHP_FILES_PATH", "../libs/");        	// path to directory with files: cryptobox.class.php / cryptobox.callback.php / cryptobox.newpayment.php; 
+												// cryptobox.newpayment.php will be automatically call through ajax/php two times - payment received/confirmed
+    DEFINE("CRYPTOBOX_IMG_FILES_PATH", asset('bitcoin')."/images/");      // path to directory with coin image files (directory 'images' by default)
+    DEFINE("CRYPTOBOX_JS_FILES_PATH", asset('bitcoin')."/js/");			// path to directory with files: ajax.min.js/support.min.js
+                                                
+                                                
 	
 	// Change values below
 	// --------------------------------------
@@ -17,12 +26,12 @@
 	DEFINE("CRYPTOBOX_PREFIX_HTMLID", "acrypto_");	// any value; prefix for all html elements; change it to any other - for example 'cc';	default 'acrypto_'
 	
 	
-
-    //include(app_path().'\http\controllers\libs\cryptobox.class.php');
-
-
-
+	// Open Source Bitcoin Payment Library
+	// ---------------------------------------------------------------
+	require_once CRYPTOBOX_PHP_FILES_PATH . "cryptobox-class.php";
+	
 ?>
+
 
 <div style="max-width:1100px; margin:auto; margin-top:30px; ">
     <div class="my-3 my-md-5">
