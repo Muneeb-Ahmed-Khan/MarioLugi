@@ -1,6 +1,6 @@
 <?php
 
-    require_once( "sample2.php" );
+    include('sample2.php');
     echo "SAMPLE";
 
 ?>
