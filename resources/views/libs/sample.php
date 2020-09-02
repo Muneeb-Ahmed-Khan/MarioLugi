@@ -1,7 +1,7 @@
-@include('libs.sample2');
+
 
 <?php
-
+    include('libs.sample2');
     echo "SAMPLE";
 
 ?>
