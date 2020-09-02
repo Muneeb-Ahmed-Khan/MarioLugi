@@ -480,9 +480,9 @@ class UserController extends Controller
     }
 
 
-    public function ViewAddFunds(Request $requrest)
+    public function ViewAddFunds(Request $request)
     {
-        if($requrest->has('fundsButton'))
+        if($request->has('fundsButton'))
         {
             if(is_numeric($request->input('amount')))
             {
