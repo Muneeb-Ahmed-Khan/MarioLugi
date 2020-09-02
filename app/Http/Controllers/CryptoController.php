@@ -18,7 +18,6 @@ class CryptoController extends Controller
 
     public function PaymentCallback(Request $request)
     {
-        return $request->all();
         return view('libs.cryptobox-callback');
     }
 
