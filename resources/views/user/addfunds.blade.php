@@ -57,7 +57,7 @@
 
     // List of coins that you accept for payments
     //$coins = array('bitcoin', 'bitcoincash', 'bitcoinsv', 'litecoin', 'dogecoin', 'dash', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'peercoin', 'monetaryunit', 'universalcurrency');
-    $coins = array('bitcoin', 'litecoin', 'dogecoin', 'dash', 'speedcoin');  // for example, accept payments in bitcoin, bitcoincash, litecoin, dash, speedcoin 
+    $coins = array('bitcoin');  // for example, accept payments in bitcoin, bitcoincash, litecoin, dash, speedcoin 
 
     // Create record for each your coin - https://gourl.io/editrecord/coin_boxes/0 ; and get free gourl keys
     // It is not bitcoin wallet private keys! Place GoUrl Public/Private keys below for all coins which you accept
