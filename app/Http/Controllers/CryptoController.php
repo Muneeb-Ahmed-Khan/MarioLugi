@@ -18,11 +18,12 @@ class CryptoController extends Controller
 
     public function PaymentCallback(Request $request)
     {
-        return view('libs.paymentcallback');
+        return $request->all();
+        return view('libs.cryptobox-callback');
     }
 
     public function Sample(Request $request)
     {
-        return view('libs.cryptobox-callback');
+        return view('libs.sample');
     }
 }

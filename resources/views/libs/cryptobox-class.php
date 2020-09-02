@@ -76,8 +76,8 @@
 if(!defined("CRYPTOBOX_WORDPRESS")) define("CRYPTOBOX_WORDPRESS", false);         
 
 if (!CRYPTOBOX_WORDPRESS) { // Pure PHP
-    require_once( "cryptobox.config.php" );
-    require_once( "cryptobox.newpayment.php" );
+    include_once "cryptobox-config.php";
+    include_once "cryptobox-newpayment.php";
 }
 elseif (!defined('ABSPATH')) exit; // Wordpress
 
@@ -155,7 +155,7 @@ class Cryptobox {
 
 		if (preg_replace('/[^A-Za-z0-9]/', '', $this->private_key) != $this->private_key || strlen($this->private_key) != 50 || !strpos($this->private_key, "AA") || $this->boxID != $this->left($this->private_key, "AA") || !strpos($this->private_key, "PRV") || $this->left($this->private_key, "PRV") != $this->left($this->public_key, "PUB")) die("Invalid Cryptocoin Payment Box PRIVATE KEY".($this->private_key?"":" - cannot be empty"));
 
-		if (!defined("CRYPTOBOX_PRIVATE_KEYS") || !in_array($this->private_key, explode("^", CRYPTOBOX_PRIVATE_KEYS))) die("Error. Please add your Cryptobox Private Key ".(CRYPTOBOX_WORDPRESS ? "on your plugin settings page" : "to \$cryptobox_private_keys in file cryptobox.config.php"));
+		if (!defined("CRYPTOBOX_PRIVATE_KEYS") || !in_array($this->private_key, explode("^", CRYPTOBOX_PRIVATE_KEYS))) die("Error. Please add your Cryptobox Private Key ".(CRYPTOBOX_WORDPRESS ? "on your plugin settings page" : "to \$cryptobox_private_keys in file cryptobox-config.php"));
 
 		if ($this->webdev_key && (preg_replace('/[^A-Za-z0-9]/', '', $this->webdev_key) != $this->webdev_key || strpos($this->webdev_key, "DEV") !== 0 || $this->webdev_key != strtoupper($this->webdev_key) || $this->icrc32($this->left($this->webdev_key, "G", false)) != $this->right($this->webdev_key, "G", false))) $this->webdev_key = "";
 
@@ -276,7 +276,7 @@ class Cryptobox {
 	 * and check user payment.
 	 *
 	 * As backup, our server will also inform your server automatically through IPN every time a payment is received
-	 * (file cryptobox.callback.php). I.e. if the user does not click on the button or you have not displayed the button,
+	 * (file cryptobox-callback.php). I.e. if the user does not click on the button or you have not displayed the button,
 	 * your website will receive a notification about a given user anyway and save it to your database.
 	 * Next time your user goes to your website/reloads page they will automatically see the message
 	 * that their payment has been received successfully.
@@ -477,7 +477,7 @@ class Cryptobox {
 	 * each of your page loadings.
 	 *
 	 * Please note that our server will also inform your server automatically every time when payment is
-	 * received through callback url: cryptobox.callback.php. I.e. if the user does not click on button,
+	 * received through callback url: cryptobox-callback.php. I.e. if the user does not click on button,
 	 * your website anyway will receive notification about a given user and save it in your database.
 	 * And when your user next time comes on your website/reload page he will automatically will see
 	 * message that his payment has been received successfully.
@@ -874,7 +874,7 @@ class Cryptobox {
 	    $page_url      = "//".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."#".$ext2; // Current page url
 	    $hide       =  "style='display:none'";
 
-	    $phpdir_path   = (defined("CRYPTOBOX_PHP_FILES_PATH")) ? CRYPTOBOX_PHP_FILES_PATH : "";            // path to directory with files cryptobox.class.php/cryptobox.callback.php/cryptobox.newpayment.php; cryptobox.newpayment.php will be automatically call through ajax or php two times - when payment received and when confirmed (6 confirmations)
+	    $phpdir_path   = (defined("CRYPTOBOX_PHP_FILES_PATH")) ? CRYPTOBOX_PHP_FILES_PATH : "";            // path to directory with files cryptobox-class.php/cryptobox-callback.php/cryptobox-newpayment.php; cryptobox-newpayment.php will be automatically call through ajax or php two times - when payment received and when confirmed (6 confirmations)
 	    $imgdir_path   = (defined("CRYPTOBOX_IMG_FILES_PATH")) ? CRYPTOBOX_IMG_FILES_PATH : "images/";     // path to directory with coin image files (directory 'images' by default)
 	    $jsdir_path    = (defined("CRYPTOBOX_JS_FILES_PATH"))  ? CRYPTOBOX_JS_FILES_PATH : "";             // path to directory with files ajax.min.js/support.min.js
 
@@ -1245,10 +1245,10 @@ class Cryptobox {
 
 	     $tmp .= "<h1 class='display-4'>Raw JSON Data (from GoUrl.io payment gateway) -</h1>";
 	     $tmp .= "<br>";
-	     $tmp .= "<p class='lead'><b>PHP Language</b> - Please use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L754'>\$box->display_cryptobox_bootstrap (...)</a>; it generate customize mobile friendly bitcoin/altcoin payment box and automatically displays successful payment message (bootstrap4, json, your own logo, white label product, etc)</p>";
-	     $tmp .= "<p class='lead'><b>ASP/Other Languages</b> - You can use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L320'>\$box->cryptobox_json_url()</a>; It generates url with your parameters to gourl.io payment gateway. ";
+	     $tmp .= "<p class='lead'><b>PHP Language</b> - Please use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox-class.php#L754'>\$box->display_cryptobox_bootstrap (...)</a>; it generate customize mobile friendly bitcoin/altcoin payment box and automatically displays successful payment message (bootstrap4, json, your own logo, white label product, etc)</p>";
+	     $tmp .= "<p class='lead'><b>ASP/Other Languages</b> - You can use function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox-class.php#L320'>\$box->cryptobox_json_url()</a>; It generates url with your parameters to gourl.io payment gateway. ";
 	     $tmp .= "Using this url you can get bitcoin/altcoin payment box values in JSON format and use it on html page with Jquery/Ajax (on the user side). ";
-	     $tmp .= "Or your server can receive JSON values through curl - function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox.class.php#L374'>\$box->get_json_values()</a>; and use it in your files/scripts directly without javascript when generating the webpage (on the server side).</p>";
+	     $tmp .= "Or your server can receive JSON values through curl - function <a target='_blank' href='https://github.com/cryptoapi/Payment-Gateway/blob/master/lib/cryptobox-class.php#L374'>\$box->get_json_values()</a>; and use it in your files/scripts directly without javascript when generating the webpage (on the server side).</p>";
 	     $tmp .= "<p class='lead'><a target='_blank' href='" . $this->cryptobox_json_url() . "'>JSON data source &#187;</a></p>";
 
 	     $tmp .= "<div class='card card-body bg-light'>";
@@ -1435,7 +1435,7 @@ class Cryptobox {
 			/**
 			 *  User-defined function for new payment - cryptobox_new_payment(...)
 			 *  For example, send confirmation email, update database, update user membership, etc.
-			 *  You need to modify file - cryptobox.newpayment.php
+			 *  You need to modify file - cryptobox-newpayment.php
 			 *  Read more - https://gourl.io/api-php.html#ipn
 			 */
 
@@ -1850,7 +1850,7 @@ class Cryptobox {
 		{
 			$v = trim(strtolower($v));
 			if (!in_array($v, $available_payments)) die("Invalid your submitted value '$v' in display_currency_box()");
-			if (strpos(CRYPTOBOX_PRIVATE_KEYS, ucfirst($v)."77") === false) die("Please add your Private Key for '$v' in variable \$cryptobox_private_keys, file cryptobox.config.php");
+			if (strpos(CRYPTOBOX_PRIVATE_KEYS, ucfirst($v)."77") === false) die("Please add your Private Key for '$v' in variable \$cryptobox_private_keys, file cryptobox-config.php");
 			$url = $coin_url.$v."#".$anchor;
 
 			if ($jquery) $tmp .= "<input type='radio' class='aradioimage' data-title='".str_replace("%coinName%", ucfirst($v), $localisation["pay_in"])."' ".($coinName==$v?"checked":"")." data-url='$url' data-width='$iconWidth' data-alt='".str_replace("%coinName%", $v, $localisation["pay_in"])."' data-image='".$directory."/".$v.($iconWidth>70?"2":"").".png' name='aradioname' value='$v'>&#160; ".($iconWidth>70 || count($coins)<4?"&#160; ":"");
@@ -2127,7 +2127,7 @@ class Cryptobox {
 			if (mysqli_connect_errno())
 			{
 				echo "<br /><b>Error. Can't connect to your MySQL server.</b> You need to have PHP 5.2+ and MySQL 5.5+ with mysqli extension activated. <a href='http://crybit.com/how-to-enable-mysqli-extension-on-web-server/'>Instruction &#187;</a>\n";
-				if (!CRYPTOBOX_WORDPRESS) echo "<br />Also <b>please check DB username/password in file cryptobox.config.php</b>\n";
+				if (!CRYPTOBOX_WORDPRESS) echo "<br />Also <b>please check DB username/password in file cryptobox-config.php</b>\n";
 				die("<br />Server has returned error - <b>".$err."</b>");
 			}
 			$mysqli->query("SET NAMES utf8");
@@ -2462,7 +2462,7 @@ class Cryptobox {
 	{
 		$cryptobox_private_keys = explode("^", CRYPTOBOX_PRIVATE_KEYS);
 		foreach ($cryptobox_private_keys as $v)
-			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox.config.php."));
+			if (strpos($v, " ") !== false || strpos($v, "PRV") === false || strpos($v, "AA") === false || strpos($v, "77") === false) die("Invalid Private Key - ". (CRYPTOBOX_WORDPRESS ? "please setup it on your plugin settings page" : "$v in variable \$cryptobox_private_keys, file cryptobox-config.php."));
 
 		unset($v); unset($cryptobox_private_keys);
 	}
