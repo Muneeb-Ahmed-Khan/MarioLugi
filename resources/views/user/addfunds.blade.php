@@ -30,13 +30,7 @@
     // ---------------------------------------------------------------
     
     $filename = "sample.php";
-    if (file_exists($filename)) {
-        echo "TRUE";
-    }
-    else
-    {
-        echo "False";
-    }
+    echo file_exists($filename);
 	
 ?>
 
