@@ -1,5 +1,5 @@
 <?php
 
-    echo "Included";
+    echo " Main File Included";
 
 ?>
