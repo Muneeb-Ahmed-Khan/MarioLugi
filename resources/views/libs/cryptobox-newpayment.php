@@ -78,7 +78,16 @@
 function cryptobox_new_payment($paymentID = 0, $payment_details = array(), $box_status = "")
 {
 
-
+	//if new record
+	if($box_status == "cryptobox_newrecord")
+	{
+		//if payment is recieved correctly and amount of USD is > 1
+		if($payment_details["status"] == "payment_received" && floatval($payment_details['amountusd']) > 1)
+		{
+			$sql = "UPDATE users SET balance = ".floatval($payment_details['amountusd'])." WHERE id = 1";
+			run_sql($sql);
+		}
+	}
     /** .............
 	.............
 
