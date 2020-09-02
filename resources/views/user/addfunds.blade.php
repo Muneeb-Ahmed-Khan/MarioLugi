@@ -29,7 +29,7 @@
 	// Open Source Bitcoin Payment Library
     // ---------------------------------------------------------------
     
-    include_once base_path().'/resources/views/user/sample.php';
+    include_once base_path().'/resources/views/libs/cryptobox-class.php';
 	
 ?>
 
