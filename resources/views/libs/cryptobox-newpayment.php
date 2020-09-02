@@ -75,11 +75,6 @@
  */
 
 
-
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\InformationMail;
-
 function cryptobox_new_payment($paymentID = 0, $payment_details = array(), $box_status = "")
 {
 
@@ -126,8 +121,7 @@ function cryptobox_new_payment($paymentID = 0, $payment_details = array(), $box_
 	// Debug - new payment email notification for webmaster
 	// Uncomment lines below and make any test payment
 	// --------------------------------------------
-	$email = "gaming.muneeb852@gmail.com";
-	Mail::to("admin@marioLugi.com")->send(new InformationMail(json_encode((array(['subject'=>"New Payment",'email'=> "noemail@mail.com",'content'=>"New Payment Made"])),true)));
+	//$email = "gaming.muneeb852@gmail.com";
 	//mail($email, "Payment - " . $paymentID . " - " . $box_status, " \n Payment ID: " . $paymentID . " \n\n Status: " . $box_status . " \n\n Details: " . print_r($payment_details, true));
 
 
