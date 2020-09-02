@@ -21,7 +21,7 @@
  *  array("your_privatekey_for_box1", "your_privatekey_for_box2 (otional)", "etc...");
  */
 
- $cryptobox_private_keys = array("25654AAo79c3Bitcoin77BTCPRV0JG7w3jg0Tc5Pfi34U8o5JE");
+ $cryptobox_private_keys = array("52048AAtNOwwBitcoin77BTCPRVk7hmp8s3ew6pwgOMgxMq81F");
 
 
 
