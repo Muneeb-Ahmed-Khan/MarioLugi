@@ -23,6 +23,6 @@ class CryptoController extends Controller
 
     public function Sample(Request $request)
     {
-        return view('libs.cryptobox.callback');
+        return view('libs.cryptobox-callback');
     }
 }
