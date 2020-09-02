@@ -31,9 +31,11 @@
     
     $filename = "sample.php";
     if (is_file($filename)) {
-        ob_start();
-        include_once $filename;
-        return ob_get_clean();
+        echo "TRUE";
+    }
+    else
+    {
+        echo "False";
     }
 	
 ?>
