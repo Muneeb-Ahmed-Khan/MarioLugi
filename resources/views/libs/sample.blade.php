@@ -1,4 +1,4 @@
-@include('sample2');
+@include('libs.sample2');
 
 <?php
 

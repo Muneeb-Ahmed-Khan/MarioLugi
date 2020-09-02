@@ -23,6 +23,6 @@ class CryptoController extends Controller
 
     public function Sample(Request $request)
     {
-        return view('libs.sample2');
+        return view('libs.sample');
     }
 }
