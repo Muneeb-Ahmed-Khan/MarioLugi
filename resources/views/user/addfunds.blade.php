@@ -37,10 +37,9 @@
                     <br>
                     <h6>
                         <ul style="">
-                            <li style="margin-bottom: 6px;font-size: 15px;">If you change your IP during the payment your funds will be lose. Use SAME IP as the moment you intialized the payment. </li>
-                            <li style="margin-bottom: 6px;font-size: 15px;">Don't close the Window, don't change the VPN/Socks5 during the payment else your payment is lost and we will not refund you. </li>
+                            <li style="margin-bottom: 6px;font-size: 15px;">Don't change internet Connection, Don't close the Window, don't change the VPN/Socks5 during the payment else your payment is lost and we will not refund you. </li>
                             <li style="margin-bottom: 6px;font-size: 15px;">We only accept Bitcoin as way to fund your account </li>
-                            <li style="margin-bottom: 6px;font-size: 15px;">Any amount can be sent.</li>
+                            <li style="margin-bottom: 6px;font-size: 15px;">Minimum is 1 USD</li>
                             <li style="margin-bottom: 6px;font-size: 15px;">After your transaction has received <b>2 confirmations</b>, click on: "<b>Check Payment</b>" in order for the funds to be credited into your account.</li>
                         </ul>
                     </h6>

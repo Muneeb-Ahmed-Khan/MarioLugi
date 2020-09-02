@@ -486,10 +486,17 @@ class UserController extends Controller
         {
             if(is_numeric($request->input('amount')))
             {
-               $amount =  $request->input('amount') + 0;
-               return view('user.addfunds')->with(["amount" => $amount, "userId" => Auth::user()->id]);
+                $amount =  $request->input('amount') + 0;
+
+                if($amount >= 1)
+                {
+                    return view('user.addfunds')->with(["amount" => $amount, "userId" => Auth::user()->id]);
+                }
+                else
+                {
+                    return back()->withErrors(["WrongInput" => "Minimum is 1 USD"]);
+                }
             }
-            
             return back()->withErrors(["WrongInput" => "Incorrect Amount Entered"]);
         }
         return view('user.addfunds');
