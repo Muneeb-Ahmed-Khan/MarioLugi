@@ -7,6 +7,8 @@
 
 
 <?php
+    print_r($information);
+    
     if(isset($user_payment_amount))
     {
             // bitcoin/altcoin payment box; open source
