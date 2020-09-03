@@ -495,7 +495,7 @@ class UserController extends Controller
 
                 if($amount >= 1)
                 {
-                    return view('user.addfunds')->with(["amount" => $amount, "userId" => Auth::user()->id, "history" => $history]);
+                    return view('user.addfunds')->with(["user_payment_amount" => $amount, "userId" => Auth::user()->id, "history" => $history]);
                 }
                 else
                 {
