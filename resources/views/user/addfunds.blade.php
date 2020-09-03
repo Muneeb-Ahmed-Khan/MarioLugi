@@ -115,10 +115,6 @@
             // IPN function cryptobox_new_payment(..) will automatically appear for each new payment two times - payment received and payment confirmed
             // Read more - https://gourl.io/api-php.html#ipn
     }
-    else
-    {
-        echo "NO";
-    }
 ?>
 
 
@@ -128,8 +124,8 @@
         <div class="page-header">
             <h4 class="page-title">Add funds</h4>
         </div>
-        <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+        <div>
+            <div>
                 <div class="card">
                 <div class="card-body">
                     <br>
@@ -206,7 +202,12 @@
                 </div>
                 </div>
             </div>
-            <div class="col-md-6 grid-margin stretch-card">
+
+
+            <br><br><br>
+
+
+            <div>
                 <div class="card">
                 <div class="card-body">
                     <h4>Payment history</h4>
