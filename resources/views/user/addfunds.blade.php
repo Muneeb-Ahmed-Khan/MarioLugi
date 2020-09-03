@@ -184,7 +184,7 @@
                                 $custom_text .= "<p class='lead'>Please contact us for any questions on admin@mariolugi.com</p>";
                                 
                                 // Display payment box 	
-                                echo $box->display_cryptobox_bootstrap($coins, $def_coin, $def_language, $custom_text, 70, 150, false, "default", "default", 250, "", "ajax", false);
+                                echo $box->display_cryptobox_bootstrap($coins, $def_coin, $def_language, $custom_text, 70, 200, true, "images/your_logo.png", "default", 250, "", "curl", true);
                                 
 
                                 // You can setup method='curl' in function above and use code below on this webpage -
