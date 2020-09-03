@@ -482,7 +482,6 @@ class UserController extends Controller
 
     public function ViewAddFunds(Request $request)
     {
-
         $history = DB::table('crypto_payments')->select('txDate', 'amountUSD')->where([
             'userID' =>  Auth::user()->id,
         ])->get();
@@ -496,16 +495,16 @@ class UserController extends Controller
 
                 if($amount >= 1)
                 {
-                    return view('user.addfunds')->with(["user_payment_amount" => $amount, "userId" => Auth::user()->id, "history" => $history, "information" => $request->all()]);
+                    return view('user.addfunds')->with(["user_payment_amount" => $amount, "userId" => Auth::user()->id, "history" => $history]);
                 }
                 else
                 {
-                    return back()->withErrors(["WrongInput" => "Minimum is 1 USD", "information" => $request->all()]);
+                    return back()->withErrors(["WrongInput" => "Minimum is 1 USD"]);
                 }
             }
-            return back()->withErrors(["WrongInput" => "Incorrect Amount Entered", "information" => $request->all()]);
+            return back()->withErrors(["WrongInput" => "Incorrect Amount Entered"]);
         }
-        return view('user.addfunds')->with(["history" => $history, "information" => $request->all()]);
+        return view('user.addfunds')->with(["history" => $history]);
     }
 
 

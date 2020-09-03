@@ -7,8 +7,6 @@
 
 
 <?php
-    print_r($information);
-    
     if(isset($user_payment_amount))
     {
             // bitcoin/altcoin payment box; open source
@@ -186,7 +184,7 @@
                                 $custom_text .= "<p class='lead'>Please contact us for any questions on admin@mariolugi.com</p>";
                                 
                                 // Display payment box 	
-                                echo $box->display_cryptobox_bootstrap($coins, $def_coin, $def_language, $custom_text, 70, 200, true, "default", "default", 250, "", "curl", true);
+                                echo $box->display_cryptobox_bootstrap($coins, $def_coin, $def_language, $custom_text, 70, 150, true, "default", "default", 250, "", "curl", false);
                                 
 
                                 // You can setup method='curl' in function above and use code below on this webpage -
