@@ -482,6 +482,8 @@ class UserController extends Controller
 
     public function ViewAddFunds(Request $request)
     {
+        echo $request->all();
+        
         $history = DB::table('crypto_payments')->select('txDate', 'amountUSD')->where([
             'userID' =>  Auth::user()->id,
         ])->get();
