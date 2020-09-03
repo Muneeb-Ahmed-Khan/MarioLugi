@@ -7,10 +7,10 @@
  *
  */
 
- define("DB_HOST", 	"127.0.0.1");				// hostname
- define("DB_USER", 	config('db.username'));		// database username from .env file
- define("DB_PASSWORD", config('db.password'));		// database password from .env file
- define("DB_NAME", 	config('db.database'));	// database name from .env file
+ define("DB_HOST", "127.0.0.1");				// hostname
+ define("DB_USER", "root");		// database username
+ define("DB_PASSWORD", "hYHR3hE/PZzC+pVwH0vUTXdDbQHMN5IT6jADUI+wyqE=");		// database password
+ define("DB_NAME", 	"mariolugi");	// database name
 
 
 
