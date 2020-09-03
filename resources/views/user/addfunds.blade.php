@@ -189,7 +189,13 @@
 
                                 // You can setup method='curl' in function above and use code below on this webpage -
                                 // if successful bitcoin payment received .... allow user to access your premium data/files/products, etc.
-                                // if ($box->is_paid()) { ... your code here ... }
+                                if ($box->is_paid()) { 
+                                    echo "PAID";
+                                }
+                                else
+                                {
+                                    echo "NOT PAID";
+                                }
                             ?>
                         
                         </div>

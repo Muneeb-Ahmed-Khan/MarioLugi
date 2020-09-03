@@ -20,5 +20,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/payment/cryptobox-callback',
+        '/user/addfunds'
     ];
 }
