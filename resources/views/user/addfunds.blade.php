@@ -133,29 +133,31 @@
                 <div class="card">
                 <div class="card-body">
                     <br>
-                    <h6>
-                        <ul style="">
-                            <li style="margin-bottom: 6px;font-size: 15px;">Don't change internet Connection, Don't close the Window, don't change the VPN/Socks5 during the payment else your payment is lost and we will not refund you. </li>
-                            <li style="margin-bottom: 6px;font-size: 15px;">We only accept Bitcoin as way to fund your account </li>
-                            <li style="margin-bottom: 6px;font-size: 15px;">Minimum is 1 USD</li>
-                            <li style="margin-bottom: 6px;font-size: 15px;">After your transaction has received <b>2 confirmations</b>, click on: "<b>Check Payment</b>" in order for the funds to be credited into your account.</li>
-                        </ul>
-                    </h6>
-                    <br>
-                    <br>
                     
                     @if(!isset($user_payment_amount))
-                    <form class="form-horizontal" method="POST" action="{{ route('addFunds') }}">
-                           @csrf
-                              <div class="form-group">
-                                    <label>Amount (USD)</label>
-                                    <input class="form-control" required name="amount" type="number" min="1" max="2000">
-                              </div>
-                              
-                              <div class="form-group">
-                                    <input type="submit" value="Pay with Bitcoin" name="fundsButton" class="btn btn-danger center-block">
-                              </div>
-                    </form>
+
+                        <h6>
+                            <ul style="">
+                                <li style="margin-bottom: 6px;font-size: 15px;">Don't change internet Connection, Don't close the Window, don't change the VPN/Socks5 during the payment else your payment is lost and we will not refund you. </li>
+                                <li style="margin-bottom: 6px;font-size: 15px;">We only accept Bitcoin as way to fund your account </li>
+                                <li style="margin-bottom: 6px;font-size: 15px;">Minimum is 1 USD</li>
+                            </ul>
+                        </h6>
+                        <br>
+                        <br>
+                    
+                    
+                        <form class="form-horizontal" method="POST" action="{{ route('addFunds') }}">
+                            @csrf
+                                <div class="form-group">
+                                        <label>Amount (USD)</label>
+                                        <input class="form-control" required name="amount" type="number" min="1" max="2000">
+                                </div>
+                                
+                                <div class="form-group">
+                                        <input type="submit" value="Pay with Bitcoin" name="fundsButton" class="btn btn-danger center-block">
+                                </div>
+                        </form>
                     @else
 
                         <div>
